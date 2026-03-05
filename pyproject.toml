@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "wayback-dl"
+version = "1.0.0"
+description = "Download an entire website from the Internet Archive Wayback Machine."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [
+    { name = "Siarhei Matrunich", email = "siarhei.matrunich@nuance.com" },
+]
+keywords = ["wayback-machine", "internet-archive", "website-downloader", "archiving", "web-archive"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: System :: Archiving",
+    "Typing :: Typed",
+]
+dependencies = [
+    "aiohttp>=3.13.3",
+    "aiofiles>=25.1.0",
+    "tenacity>=9.1.4",
+    "rich>=14.3.3",
+    "typer>=0.15.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24.0",
+    "aioresponses>=0.7.7",
+]
+
+[project.scripts]
+wayback-dl = "wayback_dl.cli:app"
+
+[project.urls]
+Changelog = "https://github.com/siarhei-m/wayback-dl/releases"
+Issues = "https://github.com/siarhei-m/wayback-dl/issues"
+Repository = "https://github.com/siarhei-m/wayback-dl"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wayback_dl"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/",
+    "tests/",
+    "LICENSE",
+    "README.md",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
